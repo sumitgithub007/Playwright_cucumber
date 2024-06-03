@@ -2,7 +2,8 @@
     "default": {
 
         "formatOptions":{
-            "snippetInterface": "async-await"
+            "snippetInterface": "async-await",
+            "monochrome":"true"
 
         },
         
@@ -21,9 +22,12 @@
  "requireModule":[
     "ts-node/register"
  ],
+ 
  "format": [
-   "html:test-result/cucumber-report.html"
- ]
+   "progress-bar",
+   "html:test-results/cucumber-report.html",
+   "json:test-results/cucumber-report.json"
+]
 
 }
 }

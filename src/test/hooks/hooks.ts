@@ -53,13 +53,12 @@ After(async function ({pickle,result}) {
 })
 
 //Below is working and correct
-// AfterStep(async function ({pickle,result}) {
+ AfterStep(async function ({pickle,result}) {
     
-//    // timestamp = String(Date.now())//;
-//     const img = await pageFixture.page.screenshot({fullPage:true});
-//     await this.attach(img,"image/png"); 
-
-// })
+    // timestamp = String(Date.now())//;
+     const img = await pageFixture.page.screenshot();
+     await this.attach(img,"image/png"); 
+ })
 
 AfterAll(async function () { 
 
@@ -69,4 +68,3 @@ AfterAll(async function () {
 })
 
 
- 

@@ -81,9 +81,9 @@ Given('User navigates to the application', async function () {
 
       When('Login should fail', async function () {
     
-      const failureMesssage =  pageFixture.page.locator("//*[text()='Username or Password is incorrect.']");
+      const failureMesssage =  pageFixture.page.locator("//*[text()='Usernjhame or Password is incorrect.']");
     //  await expect(page).toHaveTitle('Example Domain', { timeout: 10000 });
 
-      await expect(failureMesssage).toBeVisible({ timeout: 22000 });
+      await expect(failureMesssage).toBeVisible({ timeout: 10000 });
       await  pageFixture.page.waitForTimeout(2000);
        });
