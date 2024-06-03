@@ -23,6 +23,7 @@ setDefaultTimeout(60000);
           await pageFixture.page.locator("//button[@color='primary']").last().click();
           const toast = pageFixture.page.locator("simple-snack-bar");
           await expect(toast).toBeVisible();
+          await pageFixture.page.waitForTimeout(2000);
           await toast.waitFor({ state: "hidden" })
 
 

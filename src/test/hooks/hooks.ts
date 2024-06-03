@@ -1,4 +1,4 @@
-import { BeforeAll,AfterAll, After,Before, Status } from "@cucumber/cucumber";
+import { BeforeAll,AfterAll, After,Before, Status, AfterStep } from "@cucumber/cucumber";
 import { Browser, BrowserContext, chromium ,Page} from "@playwright/test";
 import { pageFixture} from "./pageFixture";
  
@@ -10,7 +10,7 @@ let timestamp:string
 
 BeforeAll(async function () {
      
-    timestamp = new Date().toISOString().replace(/[-:]/g, ''); // Generate timestamp
+   
 
     browser = await chromium.launch({headless:false,channel:"chrome"});
 
@@ -18,7 +18,12 @@ BeforeAll(async function () {
 Before(async function () { 
 
  
-    context = await browser.newContext();
+    context = await browser.newContext({viewport: {
+        width: 1280,
+        height: 674,
+    },
+    
+    });
     const page=await context.newPage();
     page.setDefaultTimeout(30000);
     pageFixture.page=page;
@@ -46,6 +51,15 @@ After(async function ({pickle,result}) {
    
 
 })
+
+//Below is working and correct
+// AfterStep(async function ({pickle,result}) {
+    
+//    // timestamp = String(Date.now())//;
+//     const img = await pageFixture.page.screenshot({fullPage:true});
+//     await this.attach(img,"image/png"); 
+
+// })
 
 AfterAll(async function () { 
 
