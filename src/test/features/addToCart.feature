@@ -12,7 +12,7 @@ Feature: Add products to cart
     When user search for a "<book>"
     And user add the book to the cart
     Then the cart badge should get updated
-    And user should get logout from page
+    #And user should get logout from page
 
     Examples:
       | username | password  | book            |

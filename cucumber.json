@@ -3,14 +3,15 @@
 
         "formatOptions":{
             "snippetInterface": "async-await"
+
         },
+        
 
  "paths":[
     "src/test/features/"
     
-
-
  ],
+ 
  "publishQuiet":true,
  "dryRun":false,
  "require":[
@@ -19,6 +20,9 @@
  ],
  "requireModule":[
     "ts-node/register"
+ ],
+ "format": [
+   "html:test-result/cucumber-report.html"
  ]
 
 }
