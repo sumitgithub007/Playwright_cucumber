@@ -12,8 +12,7 @@ try {
     
      
     fs.emptyDir("features");
-    fs.emptyDir("assets");
-    
+     
 
 } catch (error) {
     console.log("Folder not created! " + error);
