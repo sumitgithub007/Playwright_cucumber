@@ -3,9 +3,9 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-/features
+/features 
 /assets
 /test-results/cucumber-report.html
-/test-results/cucumber-report.html
+/test-results/cucumber-report.json
 @rerun.txt
 index.html
