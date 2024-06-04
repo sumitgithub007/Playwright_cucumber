@@ -1,6 +1,6 @@
 import {Given,When,Then,setDefaultTimeout} from "@cucumber/cucumber";
 import {expect} from "@playwright/test"
-import { pageFixture } from "../hooks/pageFixture";
+import { fixture } from "../hooks/pageFixture";
 setDefaultTimeout(60000);
  
  
@@ -8,10 +8,10 @@ setDefaultTimeout(60000);
 
          When('user search for a {string}', async function (book) {
           
-          
-          await pageFixture.page.locator("input[type='search']").fill(book);
+          fixture.logger.info("searching for book named "+book); 
+          await fixture.page.locator("input[type='search']").fill(book);
        
-          await pageFixture.page.locator("mat-option[role='option'] span").click();
+          await fixture.page.locator("mat-option[role='option'] span").click();
 
          });
  
@@ -20,10 +20,11 @@ setDefaultTimeout(60000);
 
          When('user add the book to the cart', async function () {
 
-          await pageFixture.page.locator("//button[@color='primary']").last().click();
-          const toast = pageFixture.page.locator("simple-snack-bar");
+          await fixture.page.locator("//button[@color='primary']").last().click();
+          const toast = fixture.page.locator("simple-snack-bar");
           await expect(toast).toBeVisible();
-          await pageFixture.page.waitForTimeout(2000);
+          fixture.logger.info("waiting for 2000 ms so we can see whats happening"); 
+          await fixture.page.waitForTimeout(2000);
           await toast.waitFor({ state: "hidden" })
 
 
@@ -33,8 +34,8 @@ setDefaultTimeout(60000);
 
          Then('the cart badge should get updated', async function () {
           
-          const badgeCount = await pageFixture.page.locator("#mat-badge-content-0").textContent();
+          const badgeCount = await fixture.page.locator("#mat-badge-content-0").textContent();
           expect(Number(badgeCount)).toBeGreaterThan(0); //yha jarurat nai hai
-          await pageFixture.page.waitForTimeout(2500);
+          await fixture.page.waitForTimeout(2500);
          });
 

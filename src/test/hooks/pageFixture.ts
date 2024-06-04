@@ -1,6 +1,7 @@
 import { Page } from "@playwright/test";
-
-export const pageFixture ={
+import {Logger}  from "winston";
+export const fixture ={
     //@ts-ignore
-    page: undefined as Page
+    page: undefined as Page,
+    logger: undefined as Logger
 }

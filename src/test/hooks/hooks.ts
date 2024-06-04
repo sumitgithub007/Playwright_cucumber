@@ -1,9 +1,13 @@
 import { BeforeAll,AfterAll, After,Before, Status, AfterStep } from "@cucumber/cucumber";
 import { Browser, BrowserContext, chromium ,Page} from "@playwright/test";
-import { pageFixture} from "./pageFixture";
+import { fixture} from "./pageFixture";
  
 
 import { time } from "console";
+import { invokeBrowser } from "../../helper/browsers/browserManager";
+import { getEnv } from "../../helper/env/env";
+import { createLogger } from "winston";
+import { options } from "../../helper/utils/logger";
 let browser:Browser;
 let context:BrowserContext;
 let timestamp:string
@@ -11,11 +15,11 @@ let timestamp:string
 BeforeAll(async function () {
      
    
-
-    browser = await chromium.launch({headless:false,channel:"chrome"});
+    getEnv();
+    browser = await invokeBrowser();
 
 })
-Before(async function () { 
+Before(async function ({pickle}) { 
 
  
     context = await browser.newContext({viewport: {
@@ -24,13 +28,15 @@ Before(async function () {
     },
     
     });
+
+    const scenarioName = pickle.name+pickle.id;
     const page=await context.newPage();
     page.setDefaultTimeout(30000);
-    pageFixture.page=page;
-
+    fixture.page=page;
+   fixture.logger=createLogger(options(scenarioName));
 
 })
-
+ 
 After(async function ({pickle,result}) { 
 
    // const timestamp = new Date().toISOString().replace(/[-:]/g, ''); // Generate timestamp
@@ -42,11 +48,11 @@ After(async function ({pickle,result}) {
   console.log(result?.status);
   if(result?.status==Status.FAILED)
     {
-        const img = await pageFixture.page.screenshot({path:`./test-result/screenshots/${pickle.id}.png`,type:"png"})
+        const img = await fixture.page.screenshot({path:`./test-result/screenshots/${pickle.id}.png`,type:"png"})
         await this.attach(img,"image/png"); 
     } 
 
-   await pageFixture.page.close();
+   await fixture.page.close();
     await context.close();
    
 
@@ -56,7 +62,7 @@ After(async function ({pickle,result}) {
  AfterStep(async function ({pickle,result}) {
     
     // timestamp = String(Date.now())//;
-     const img = await pageFixture.page.screenshot();
+     const img = await fixture.page.screenshot();
      await this.attach(img,"image/png"); 
  })
 
@@ -64,6 +70,7 @@ AfterAll(async function () {
 
  
     await browser.close();
+    await fixture.logger.close();
 
 })
 

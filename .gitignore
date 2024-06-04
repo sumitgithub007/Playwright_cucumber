@@ -7,5 +7,6 @@ node_modules/
 /assets
 /test-results/cucumber-report.html
 /test-results/cucumber-report.json
+/test-results/logs
 @rerun.txt
 index.html
