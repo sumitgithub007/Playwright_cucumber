@@ -18,15 +18,21 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
+      id: test
       run: |
-        npm test > test-output.txt
-        if grep -q "Test failed" test-output.txt; then
-          echo "failed"
+        npm test
+        if [ $? -eq 0 ]; then
+          echo "::set-output name=test_status::passed"
+        else
+          echo "::set-output name=test_status::failed"
           exit 1
         fi
+    - name: Set test status
+      if: steps.test.outputs.test_status != 'passed'
+      run: exit 1
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
-        path: test-results
+        path: test-results/
         retention-days: 30
