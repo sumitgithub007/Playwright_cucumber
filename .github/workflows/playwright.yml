@@ -20,7 +20,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Cucumber tests
-      run: npm test --TAGS="@sanity"
+      run: npm test
     - uses: actions/upload-artifact@v4
       if: always()
       with:
