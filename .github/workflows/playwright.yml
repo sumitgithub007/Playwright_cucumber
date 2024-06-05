@@ -25,14 +25,15 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Cucumber tests
         run: npm test
+      - name: Check test result
+        run: |
+          if [ $? -ne 0 ]; then
+            echo "Tests failed. Exiting with error status."
+            exit 1
+          fi
       - uses: actions/upload-artifact@v4
         if: success()
         with:
           name: Report
           path: test-results
           retention-days: 3
-      - uses: actions/checkout@v4
-        if: failure()
-      - name: Build failed but report generated
-        if: failure()
-        run: exit 1

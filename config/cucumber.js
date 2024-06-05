@@ -17,7 +17,6 @@ module.exports= {
     
  ],
  
- "publishQuiet":true,
  "dryRun":false,
  "require":[
     "src/test/steps/*.ts",

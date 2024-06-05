@@ -61,11 +61,13 @@ Given('User navigates to the application', async function () {
       Then('Login should be success', async function () {
     
         await  fixture.page.waitForLoadState("networkidle");
-        const user =  fixture.page.locator("(//spakn[@class='mdc-button__label'])[2]");
+        const user =  fixture.page.locator("(//span[@class='mdc-button__label'])[2]");
         await expect(user).toBeVisible();
+        await expect(user).toBeEmpty();
         const userName = await user.textContent();
         console.log("Username: " + userName);
         fixture.logger.info("Login successfull username is ="+userName); 
+
         
       });
 
