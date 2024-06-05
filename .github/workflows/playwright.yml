@@ -22,8 +22,18 @@ jobs:
     - name: Run Cucumber tests
       run: npm test
     - uses: actions/upload-artifact@v4
-      if: always()
+      if: success()
       with:
         name: Report
         path: test-results
         retention-days: 3
+      if: failure()
+      with:
+        name: Report
+        path: test-results
+        retention-days: 3
+        steps:
+        - uses: actions/checkout@v1
+        - name: Build failed but report generated
+          run: exit 1
+      
