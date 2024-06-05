@@ -8,5 +8,7 @@ node_modules/
 /test-results/cucumber-report.html
 /test-results/cucumber-report.json
 /test-results/logs
+/test-results/reports
+/test-results/video
 @rerun.txt
 index.html
