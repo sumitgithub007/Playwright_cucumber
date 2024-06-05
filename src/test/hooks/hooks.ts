@@ -72,6 +72,7 @@ const img = await fixture.page.screenshot();
  AfterStep(async function ({pickle,result}) {
     
     // timestamp = String(Date.now())//;
+    await this.attach("info");
       const img = await fixture.page.screenshot();
       await this.attach(img,"image/png"); 
  })
