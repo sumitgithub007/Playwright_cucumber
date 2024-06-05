@@ -16,6 +16,10 @@ BeforeAll(async function () {
    
     getEnv();
     browser = await invokeBrowser();
+    fixture.logger=createLogger(options(null));
+     
+    
+
 
 })
 Before(async function ({pickle}) { 
@@ -25,8 +29,7 @@ Before(async function ({pickle}) {
     newContext({viewport: { width: 1280,height: 674},recordVideo:{dir:"test-results/video"}
     
     });
-
-    const scenarioName = pickle.name+pickle.id;
+     const scenarioName = pickle.name+pickle.id;
     const page=await context.newPage();
     page.setDefaultTimeout(30000);
     fixture.page=page;
@@ -43,7 +46,7 @@ After(async function ({pickle,result}) {
     await fixture.page.close();
     await context.close();
     if (result?.status == Status.PASSED) {
-        //await this.attach("hi there");
+        await this.attach("hi there");
         await this.attach(fs.readFileSync(videoPath),"video/webm");
     
     };
@@ -61,8 +64,8 @@ After(async function ({pickle,result}) {
 
 AfterAll(async function () { 
 
-     await browser.close();
-    await fixture.logger.close();
+      await browser.close();
+    fixture.logger.close();
 
 })
 

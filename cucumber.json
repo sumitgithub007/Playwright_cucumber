@@ -1,6 +1,7 @@
 {
     "default": {
-
+      
+       "tags":"@test",
         "formatOptions":{
             "snippetInterface": "async-await",
             "monochrome":"true"
@@ -60,7 +61,7 @@
 "json:test-results/cucumber-report.json",
 "rerun:@rerun.txt"
 ],
-"parallel":4
+"parallel":1
 
 
 

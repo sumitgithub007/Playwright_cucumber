@@ -2,7 +2,7 @@ import { LaunchOptions, chromium, firefox, webkit } from "@playwright/test";
 import { channel } from "process";
 
 const chromeoptions: LaunchOptions = {
-    headless: true,
+    headless: false,
     channel:"chrome"
    // slowMo:1000
 }
