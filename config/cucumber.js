@@ -4,7 +4,7 @@ module.exports= {
 
     "default": {
       
-       "tags":process.env.npm_config_TAGS || "@smoke",
+       "tags":process.env.npm_config_TAGS || "@test",
         "formatOptions":{
             "snippetInterface": "async-await",
             "monochrome":"true"
@@ -33,7 +33,7 @@ module.exports= {
    "json:test-results/cucumber-report.json",
    "rerun:@rerun.txt"
 ],
-"parallel":1
+"parallel":6
 
 
 },
