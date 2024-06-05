@@ -38,27 +38,12 @@ After(async function ({pickle,result}) {
 
     let videoPath: string;
     videoPath = await fixture.page.video().path();
-    
-   // const timestamp = new Date().toISOString().replace(/[-:]/g, ''); // Generate timestamp
-    //const filename = `./test-result/screenshots/${pickle.id}_${timestamp}.png`; // Concatenate timestamp with filename
-     //const img = await pageFixture.page.screenshot({ path: filename, type: "png" });
- 
-   //const img = await pageFixture.page.screenshot({path:`./test-result_${timestamp}/screenshots/${pickle.id}.png`,type:"png"})
-  console.log(result?.status);
-  
-//   if(result?.status==Status.FAILED)
-//     {
-//         const img = await fixture.page.screenshot({path:`./test-result/screenshots/${pickle.id}.png`,type:"png"})
-//         await this.attach(img,"image/png"); 
-//     } 
-     
-const img = await fixture.page.screenshot();
+      
+    const img = await fixture.page.screenshot();
     await fixture.page.close();
     await context.close();
     if (result?.status == Status.PASSED) {
-        
-    
-        await this.attach("hi there");
+        //await this.attach("hi there");
         await this.attach(
             fs.readFileSync(videoPath),
             'video/webm'
@@ -79,8 +64,7 @@ const img = await fixture.page.screenshot();
 
 AfterAll(async function () { 
 
- 
-    await browser.close();
+     await browser.close();
     await fixture.logger.close();
 
 })
