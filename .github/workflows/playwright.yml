@@ -23,9 +23,9 @@ jobs:
       id: test
       run: |
         npm test | tee test-output.txt
-        if grep -q "Test failed" test-output.txt; then
+        if grep -q "failed" test-output.txt; then
           echo "Tests failed"
-          echo "FAILED" > test-status.txt
+          echo "failed" > test-status.txt
         else
           echo "Tests passed"
           echo "PASSED" > test-status.txt
@@ -36,7 +36,7 @@ jobs:
       run: echo "TEST_STATUS=$(cat test-status.txt)" >> $GITHUB_ENV
     - name: Check test status
       run: |
-        if [ "$TEST_STATUS" == "FAILED" ]; then
+        if [ "$TEST_STATUS" == "failed" ]; then
           exit 1
         fi
     - uses: actions/upload-artifact@v4
