@@ -12,7 +12,7 @@ Feature: User Authentication tests
     Then Login should be success
     And user should get logout from page
 
-  @test
+  @smoke
   Scenario: Login should not be success
     Given User enter the username as "koushik"
     Given User enter the password as "Passkoushik"
