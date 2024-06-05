@@ -44,10 +44,9 @@ After(async function ({pickle,result}) {
     await context.close();
     if (result?.status == Status.PASSED) {
         //await this.attach("hi there");
-        await this.attach(
-            fs.readFileSync(videoPath),
-            "video/webm"
-        )};
+        await this.attach(fs.readFileSync(videoPath),"video/webm");
+    
+    };
  
       
     //   await this.attach(img,"image/png"); 
