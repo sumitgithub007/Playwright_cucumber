@@ -22,13 +22,14 @@ jobs:
       run: |
         npm test
         if [ $? -eq 0 ]; then
+          echo "Tests passed"
           echo "::set-output name=test_status::passed"
         else
+          echo "Tests failed"
           echo "::set-output name=test_status::failed"
-          exit 1
         fi
     - name: Set test status
-      if: steps.test.outputs.test_status != 'passed'
+      if: steps.test.outputs.test_status == 'failed'
       run: exit 1
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
