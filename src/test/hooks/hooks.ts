@@ -58,12 +58,12 @@ const img = await fixture.page.screenshot();
     if (result?.status == Status.PASSED) {
         
     
+        await this.attach("hi there");
         await this.attach(
             fs.readFileSync(videoPath),
             'video/webm'
         )};
-        await fixture.page.waitForTimeout(10000);
-
+ 
       
     //   await this.attach(img,"image/png"); 
 })
