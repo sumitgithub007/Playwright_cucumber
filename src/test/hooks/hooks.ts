@@ -46,7 +46,7 @@ After(async function ({pickle,result}) {
         //await this.attach("hi there");
         await this.attach(
             fs.readFileSync(videoPath),
-            'video/webm'
+            "video/webm"
         )};
  
       
@@ -55,9 +55,7 @@ After(async function ({pickle,result}) {
 
 //Below is working and correct
  AfterStep(async function ({pickle,result}) {
-    
-    // timestamp = String(Date.now())//;
-    await this.attach("info");
+     
       const img = await fixture.page.screenshot();
       await this.attach(img,"image/png"); 
  })
