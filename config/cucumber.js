@@ -4,7 +4,7 @@ module.exports= {
 
     "default": {
       
-       "tags":process.env.npm_config_TAGS || "@test",
+       "tags":process.env.npm_config_TAGS || "@smoke",
         "formatOptions":{
             "snippetInterface": "async-await",
             "monochrome":"true"

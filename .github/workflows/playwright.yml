@@ -7,7 +7,7 @@ on:
 jobs:
   test:
     env:
-      tags: "@sanity"  
+    - tags: "@sanity"  
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
