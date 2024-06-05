@@ -4,7 +4,8 @@ Feature: Add products to cart
     Given User navigates to the application
     And User click on the login link
 
- 
+  
+  @test
   Scenario Outline: Authenticated Users - Add to cart
     And User enter the username as "<username>"
     And User enter the password as "<password>"
