@@ -20,13 +20,14 @@ jobs:
     - name: Run Playwright tests
       id: test
       run: |
-        npm test
-        if [ $? -eq 0 ]; then
-          echo "Tests passed"
-          echo "::set-output name=test_status::passed"
-        else
+        npm test | tee test-output.txt
+        if grep -q "failed" test-output.txt; then
           echo "Tests failed"
           echo "::set-output name=test_status::failed"
+          exit 1
+        else
+          echo "Tests passed"
+          echo "::set-output name=test_status::passed"
         fi
     - name: Set test status
       if: steps.test.outputs.test_status == 'failed'
