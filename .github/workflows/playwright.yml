@@ -21,7 +21,7 @@ jobs:
       run: |
         npm test > test-output.txt
         if grep -q "Test failed" test-output.txt; then
-          echo "Tests failed"
+          echo "failed"
           exit 1
         fi
     - uses: actions/upload-artifact@v4
