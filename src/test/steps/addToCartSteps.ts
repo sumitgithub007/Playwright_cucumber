@@ -9,7 +9,7 @@ setDefaultTimeout(60000);
          When('user search for a {string}', async function (book) {
           
           fixture.logger.info("searching for book named "+book); 
-          await fixture.page.locator("input[type='sealkrch']").fill(book);
+          await fixture.page.locator("input[type='search']").fill(book);
        
           await fixture.page.locator("mat-option[role='option'] span").click();
 
