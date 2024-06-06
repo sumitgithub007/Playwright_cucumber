@@ -29,8 +29,19 @@ Before(async function ({pickle}) {
     newContext({viewport: { width: 1280,height: 674},recordVideo:{dir:"test-results/video"}
     
     });
-     const scenarioName = pickle.name+pickle.id;
-    const page=await context.newPage();
+    const scenarioName = pickle.name + pickle.id;
+   
+    await context.tracing.start({
+        name: scenarioName,
+        title: pickle.name,
+        sources: true,
+        screenshots: true, snapshots: true
+    });
+   
+   
+   
+   
+     const page=await context.newPage();
     page.setDefaultTimeout(30000);
     fixture.page=page;
    fixture.logger=createLogger(options(scenarioName));
@@ -43,15 +54,18 @@ After(async function ({pickle,result}) {
     videoPath = await fixture.page.video().path();
       
     const img = await fixture.page.screenshot();
+    const path = `./test-results/trace/${pickle.id}.zip`
+    await context.tracing.stop({ path: path });
     await fixture.page.close();
     await context.close();
-    if (result?.status == Status.PASSED) {
+    
         await this.attach("hi there");
         await this.attach(fs.readFileSync(videoPath),"video/webm");
     
-    };
+        const traceFileLink = `<a href="https://trace.playwright.dev/">Open ${path}</a>`
+        await this.attach(`Trace file: ${traceFileLink}`, 'text/html');
  
-      
+            
     //   await this.attach(img,"image/png"); 
 })
 
