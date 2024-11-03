@@ -15,7 +15,7 @@ let assert: Assert;
 Given('I navigate to the register page', async function () {
     registerPage = new RegisterPage(fixture.page);
     assert = new Assert(fixture.page);
-    await registerPage.navigateToRegisterPage();
+     await registerPage.navigateToRegisterPage();
 });
 
 When('I created a new user', async function () {
